@@ -62,7 +62,9 @@ export class Expression {
 	/**
 	 * Extend with custom functions
 	 */
-	extend(functions: Record<string, (...args: unknown[]) => unknown>): this {
+
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	extend(functions: Record<string, (...args: any[]) => any>): this {
 		if (!this.options.strictMode) {
 			for (const [key, value] of Object.entries(functions)) {
 				this.interpreter.setFunction(key, value);
